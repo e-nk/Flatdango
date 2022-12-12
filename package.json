@@ -1,0 +1,29 @@
+{
+  "name": "flatdango",
+  "version": "1.0.0",
+  "description": "Flatdango, that allows a user to purchase movie tickets from the",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-nk/Flatdango.git"
+  },
+  "keywords": [
+    "Flatdango",
+    "Fetch",
+    "JSON",
+    "API"
+  ],
+  "author": "Enock Kipkoech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-nk/Flatdango/issues"
+  },
+  "homepage": "https://github.com/e-nk/Flatdango#readme",
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
