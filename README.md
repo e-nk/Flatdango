@@ -1,6 +1,8 @@
 # Flatdango
 An application that allows a user to purchase movie tickets
 
+<h3>Preview</h3> 
+
 You can view the project by following this link [CLICK ME](https://e-nk.github.io/Flatdango/public/)
 
 # Getting started
