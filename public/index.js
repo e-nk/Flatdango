@@ -77,21 +77,23 @@ fetch(link).then((data)=>{
         
         <br><br>
       </div>
-      `
-    });
-    document.getElementById("cards").innerHTML=data1
-    displayCard.map((values)=>{
-      data2=`<div class="col-4">
+      <div class="col-4">
       <img src=${values.poster} height="200px" width="200px">
         <h5>${values.title}</h5>
         <p>Runtime: ${values.runtime}</p>
         <p>Showtime: ${values.showtime}</p>
         <p>Tickets sold: ${values.tickets_sold}</p>
-        <p class="available">Tickets Available: ${ticketsAvailable}</p>
+        <p class="available">Tickets Available: 3 ${ticketsAvailable}</p>
         
         <a href="#" class="btn btn-success">$ Buy Tickets</a>
 
       </div>
+
+      `
+    });
+    document.getElementById("cards").innerHTML=data1
+    displayCard.map((values)=>{
+      data2=`
       `
     }) 
 
