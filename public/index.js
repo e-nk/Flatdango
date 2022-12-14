@@ -1,10 +1,13 @@
+const ticketsAvailable = document.querySelector=("available")
+
 const link= 'http://localhost:3000/films'
 fetch(link).then((data)=>{
     //console.log(data)
     return data.json();
 }).then((completeddata)=>{
     //console.log(completeddata[1].title);
-    let data1="";
+    let data1="";  
+    let data2=""; 
     completeddata.map((values)=>{
         data1=`<div class="col-4">
         <h4>Movie list and available tickets</h4>
@@ -74,17 +77,35 @@ fetch(link).then((data)=>{
         
         <br><br>
       </div>
-      <div class="col-4">
+      `
+    });
+    document.getElementById("cards").innerHTML=data1
+    displayCard.map((values)=>{
+      data2=`<div class="col-4">
       <img src=${values.poster} height="200px" width="200px">
         <h5>${values.title}</h5>
         <p>Runtime: ${values.runtime}</p>
         <p>Showtime: ${values.showtime}</p>
         <p>Tickets sold: ${values.tickets_sold}</p>
+        <p class="available">Tickets Available: ${ticketsAvailable}</p>
+        
         <a href="#" class="btn btn-success">$ Buy Tickets</a>
 
-      </div>`
-    });
-    document.getElementById("cards").innerHTML=data1
+      </div>
+      `
+    }) 
+
+
+
+
+    const purchaseTicket= (values) => {
+      if (!(values.tickets_sold> values.capacity)&& (values.capacity - values.tickets_sold)>=1){
+        values.tickets_sold +=1;
+        ticketsAvailable.innerHTML=values.capacity - values.tickets_sold;
+      }else{
+        ticketsAvailable.innerHTML=': The theater is already full'
+      }
+    }
 
 
    
