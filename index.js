@@ -1,117 +1,76 @@
-const ticketsAvailable = document.querySelector=("available")
+document.addEventListener("DOMContentLoaded", () => {
+  // getting elements from the DOM
+  const moviesListContainer = document.querySelector("#moviesList");
+  const movieDetailsContainer = document.querySelector("#movieDetails");
 
-const link= 'http://localhost:3000/films'
-fetch(link).then((data)=>{
-    //console.log(data)
-    return data.json();
-}).then((completeddata)=>{
-    //console.log(completeddata[1].title);
-    let data1="";  
-    let data2=""; 
-    completeddata.map((values)=>{
-        data1=`<div class="col-4">
-        <h4>Movie list and available tickets</h4>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[0].title}
-            <span class="badge bg-primary rounded-pill">3</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[1].title}
-            <span class="badge bg-primary rounded-pill">6</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[2].title}
-            <span class="badge bg-primary rounded-pill">19</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[3].title}
-            <span class="badge bg-primary rounded-pill">9</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[4].title}
-            <span class="badge bg-primary rounded-pill">5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[5].title}
-            <span class="badge bg-primary rounded-pill">14</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[6].title}
-            <span class="badge bg-primary rounded-pill">8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[7].title}
-            <span class="badge bg-primary rounded-pill">8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[8].title}
-            <span class="badge bg-primary rounded-pill">8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[9].title}
-            <span class="badge bg-primary rounded-pill">6</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[10].title}
-            <span class="badge bg-primary rounded-pill">8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[11].title}
-            <span class="badge bg-primary rounded-pill">10</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[12].title}
-            <span class="badge bg-primary rounded-pill">9</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[13].title}
-            <span class="badge bg-primary rounded-pill">10</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          ${completeddata[14].title}
-            <span class="badge bg-primary rounded-pill">17</span>
-          </li>
-        </ul>
-
-        
-        <br><br>
-      </div>
-      <div class="col-4">
-      <img src=${values.poster} height="200px" width="200px">
-        <h5>${values.title}</h5>
-        <p>Runtime: ${values.runtime}</p>
-        <p>Showtime: ${values.showtime}</p>
-        <p>Tickets sold: ${values.tickets_sold}</p>
-        <p class="available">Tickets Available: 3 ${ticketsAvailable}</p>
-        
-        <a href="#" class="btn btn-success">$ Buy Tickets</a>
-
-      </div>
-
-      `
+  // getting films data
+  fetch("https://e-nk.github.io/dbjson/db.json")
+    .then((res) => res.json())
+    .then((data) => {
+      displayMoviesList(data.films);
     });
-    document.getElementById("cards").innerHTML=data1
-    displayCard.map((values)=>{
-      data2=`
-      `
-    }) 
 
+  //   displaying movies titles
+  function displayMoviesList(data) {
+    data.map((movie) => {
+      const markUp = `<li class="list-group-item" aria-current="true" id="movieList">${movie.title}</li>`;
 
+      // append movie titles
+      moviesListContainer.insertAdjacentHTML("afterbegin", markUp);
 
+      // show the first movie details on the list on load of the page
+      displayMovieDetails(movie);
 
-    const purchaseTicket= (values) => {
-      if (!(values.tickets_sold> values.capacity)&& (values.capacity - values.tickets_sold)>=1){
-        values.tickets_sold +=1;
-        ticketsAvailable.innerHTML=values.capacity - values.tickets_sold;
-      }else{
-        ticketsAvailable.innerHTML=': The theater is already full'
-      }
+      // show movie details on click of the movie titles
+      const movieList = document.querySelector("#movieList");
+      movieList.addEventListener("click", () => {
+        displayMovieDetails(movie);
+      });
+    });
+  }
+
+  // movie details
+  function displayMovieDetails(movie) {
+    const markUp = `<img src="${movie.poster}" style="height="80px" Width="200px">
+  <div>
+  <h4 id="movieTitle">${movie.title}</h4>
+  <p id="description">${movie.description}</p>
+  <p id="runtime">Length: <span>${movie.runtime} Minutes</span></p>
+  <p id="showtime">Show Time: <span>${movie.showtime}</span></p>
+  <p id="capacity">Theater capacity: <span>${movie.capacity}</span></p>
+  <p id="ticketssold">Tickets sold: <span>${movie.tickets_sold}</span></p>
+  <p id="availableTickets">Available tickets: <span>${
+    movie.capacity - movie.tickets_sold
+  }</span></p>
+  <button class="custombtn btn btn-success " id="buyTicket"> $ Buy ticket</button>
+ </div>`;
+
+    movieDetailsContainer.innerHTML = "";
+    movieDetailsContainer.insertAdjacentHTML("afterbegin", markUp);
+
+    const btn = movieDetailsContainer.querySelector("button");
+    btn.addEventListener("click", () => {
+      buyTicket(movie);
+    });
+  }
+
+  // ticket buying functionality
+  
+  function buyTicket(movie) {
+    const ticketsSold = document.querySelector("#ticketssold");
+    let remainingTickets = movie.capacity - movie.tickets_sold;
+    const btn = movieDetailsContainer.querySelector("button");
+    const availableTickets = document.querySelector("#availableTickets");
+
+    if (remainingTickets > 0) {
+      movie.tickets_sold++;
+      remainingTickets--;
+      btn.innerHTML = "Buy";
+    } else {
+      btn.innerHTML = "We are sold out ⌛";
+      btn.classList.add("soldOut");
     }
-
-
-   
-
-}).catch((error)=>{
-    console.log(error);
+    ticketsSold.innerHTML = `Tickets sold: <span>${movie.tickets_sold}</span>`;
+    availableTickets.innerHTML = `Available tickets: <span>${remainingTickets}</span>`;
+  }
 });
