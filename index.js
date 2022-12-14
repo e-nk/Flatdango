@@ -1,6 +1,6 @@
 const ticketsAvailable = document.querySelector=("available")
 
-const link= 'http://localhost:3000/films'
+const link= 'https://flatdango.vercel.app/db.json'
 fetch(link).then((data)=>{
     //console.log(data)
     return data.json();
