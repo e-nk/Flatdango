@@ -1,6 +1,8 @@
 # Flatdango
 An application that allows a user to purchase movie tickets
 
+You can view the project by following this link [CLICK ME](https://e-nk.github.io/Flatdango/public/)
+
 # Getting started
 To setup and run this project on your machine, follow through these instructions and steps.
 In order for you to use the content on this repo ensure you have the following:
