@@ -112,6 +112,3 @@ fetch(link).then((data)=>{
 
    
 
-}).catch((error)=>{
-    console.log(error);
-});
