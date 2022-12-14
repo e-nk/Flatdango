@@ -1,6 +1,6 @@
 const ticketsAvailable = document.querySelector=("available")
 
-const link= 'http://localhost:3000/films'
+const link= 'https://localhost:3000/films'
 fetch(link).then((data)=>{
     //console.log(data)
     return data.json();
