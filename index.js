@@ -91,24 +91,3 @@ fetch(link).then((data)=>{
 
       `
     });
-    document.getElementById("cards").innerHTML=data1
-    displayCard.map((values)=>{
-      data2=`
-      `
-    }) 
-
-
-
-
-    const purchaseTicket= (values) => {
-      if (!(values.tickets_sold> values.capacity)&& (values.capacity - values.tickets_sold)>=1){
-        values.tickets_sold +=1;
-        ticketsAvailable.innerHTML=values.capacity - values.tickets_sold;
-      }else{
-        ticketsAvailable.innerHTML=': The theater is already full'
-      }
-    }
-
-
-   
-
